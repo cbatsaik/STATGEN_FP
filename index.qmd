@@ -4,19 +4,19 @@ title: "Collider Bias"
 
 ## **What is Collider Bias?**
 
-In statistics, a **collider** is a variable that is **causally associated with predictors X and Y**. Including colliders in a model leads to **collider bias** because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.\
+In statistics, a **collider** is a variable that is **causally associated with predictors X and Y**. Including colliders in a model leads to **collider bias** because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.
 
-\[Add collider dag\]
+![](images/Collider Basic DAG.png){width="850"}
 
 An example of collider bias is Berkson’s Bias. Berkson demonstrated how **two diseases that are unrelated in the general population**, like gallbladder inflammation and diabetes, **can become spuriously associated when a sample is restricted to individuals in a hospital,** because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population. If we looked at the general population, we would not see this association, so **the collider variable “hospital” is introducing the bias.**
 
-\[Add Hospital Image\]
+![](images/Hospital DAG.png){width="850"}
 
 Usually, scientists have **removed** colliders from their models to escape this bias. However, we suggest that scientists implement **collider correction methods** to retain the important predictive information from the collider variable while still producing an unbiased model.\
 
 For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using **2-Stage Mendelian Randomization**. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.
 
-Table of Contents:
+**Table of Contents:**
 
 1.  Homepage
 
