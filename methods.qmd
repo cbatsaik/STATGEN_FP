@@ -1,3 +1,9 @@
 ---
-title: "method"
+title: "Weak Instrument Bias"
 ---
+
+Weak Instrument Bias occurs when Instrumental Variables (IVs) are only **weakly** associated with the collider variable. This bias causes Type 1 Error since the IVs don't explain sufficient amounts of variation in the collider variable.
+
+Methods that use IV's are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV's, but it corrects for their confounding so it does not experience this bias as strongly as some other methods. 
+
+When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.

@@ -1,9 +1,5 @@
 ---
-title: "About"
+title: "Statistical Genetics Collider Correction (MR)"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+## **Mendelian Randomization**
