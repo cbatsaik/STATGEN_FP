@@ -1,40 +1,49 @@
 ---
-title: "Introduction to Our Project"
+title: "Statistical Genetics Final Project"
+subtitle: "Project by: Charles Batsaikhan '25, Mikaely Evans '25, and Julia Ross '26"
 ---
 
-## **Table of Contents:**
+Final Project website for STAT 494. Course taught by Dr. Kelsey Grinde. Spring 2025, Macalester College.
 
-1.  Introduction to our Project
+## **Table of Contents**
 
-    1.  What is Collider Bias
+1.  **Home**
 
-    2.  How is this Related to Statistical Genetics?
+    -   What is Collider Bias?
 
-2.  Implementation
+    -   How is this Related to Statistical Genetics?
 
-    1.  Simulating Our Data
+2.  **Implementation**
 
-    2.  Mendelian Randomization
+    -   Simulating Our Data
 
-    3.  Instrument Variables
+    -   Mendelian Randomization
 
-    4.  Results
+    -   Instrument Variables
 
-3.  Limitations
+    -   Results
 
-    1.  Weak Instrument Bias
+3.  **Limitations**
 
-4.  Other Existing Methods
+    -   Weak Instrument Bias
 
-    1.  Instrument Effect Regression Method
+4.  **Other Methods**
 
-    2.  Corrected Weighted Least Squares Method
+    -   Instrument Effect Regression Method
 
-    3.  Slope-Hunter Method
+    -   Corrected Weighted Least Squares Method
 
-5.  Sources
+    -   Slope-Hunter Method
 
-## **What is Collider Bias?**
+5.  **Sources**
+
+    -   Scientific Literature
+
+    -   R Packages
+
+    -   Other
+
+## **What is a Collider?**
 
 **A collider is a variable caused by both X and Y**, and including it in a model **leads to bias** because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. 
 
@@ -42,7 +51,7 @@ Colliders are less common than confounding variables and mediator variables, whi
 
 ![](images/Collider Basic DAG.png){width="850"}
 
-## Berkson's Bias
+## How does a Collider Cause Bias?
 
 How exactly does the inclusion of a collider cause bias? Physician and statistician **Joseph Berkson** helped explain this with a paradoxical example, which is why Collider bias is also known as **Berkson’s bias**. 
 

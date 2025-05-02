@@ -3,20 +3,20 @@ title: "Other Existing Methods"
 subtitle: "Collider Correction Methods to Explore Further"
 ---
 
-## **Instrument Effect Regression**
+## Instrument Effect Regression
 
 
 
 
 
-## **Slope-Hunter**
+## Slope-Hunter
 
 The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV's are used to produce a new slope that has adjusted for the effect of the Collider Variables.
 
 This model assumes that its model based clustering algorithm has **correctly** identified the instrumental variables. If these IV's were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists and the results are inaccurate.
 
 
-## **Corrected Weighted Least Squares**
+## Corrected Weighted Least Squares
 
 The Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant. 
 

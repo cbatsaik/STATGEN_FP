@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.5.57" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Limitations – STATGEN_FP</title>
@@ -24,7 +22,23 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -54,46 +68,44 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="/index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">STATGEN_FP</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-  aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation"
-  onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/implementation.html"> 
+    <a class="nav-link" href="./implementation.html"> 
 <span class="menu-text">Implementation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/methods.html"> 
+    <a class="nav-link active" href="./methods.html" aria-current="page"> 
 <span class="menu-text">Limitations</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/results.html"> 
+    <a class="nav-link" href="./results.html"> 
 <span class="menu-text">Other Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="/sources.html"> 
+    <a class="nav-link" href="./sources.html"> 
 <span class="menu-text">Sources</span></a>
   </li>  
 </ul>
@@ -107,8 +119,8 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -136,15 +148,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Weak Instrument Bias occurs when Instrumental Variables (IVs) are only <strong>weakly</strong> associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.</p>
 <p>Methods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.</p>
 <p>When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.</p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-sidebar-title">STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar-title">STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:Home">Home</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:/index.html">/index.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:Implementation">Implementation</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:/implementation.html">/implementation.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:Limitations">Limitations</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:/methods.html">/methods.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:Other Methods">Other Methods</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:/results.html">/results.html</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:Sources">Sources</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-int-navbar:/sources.html">/sources.html</span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-metatitle">Limitations – STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-twittercardtitle">Limitations – STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-ogcardtitle">Limitations – STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-metasitename">STATGEN_FP</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-twittercarddesc">Weak Instrument Bias</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="quarto-ogcardddesc">Weak Instrument Bias</span></p>
-</div>
+
+
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -566,6 +574,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>
