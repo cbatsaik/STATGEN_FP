@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>method – STATGEN_FP</title>
+<title>Weak Instrument Bias – STATGEN_FP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Statistical Genetics Collider Correction (MR)</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -115,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">method</h1>
+<h1 class="title">Weak Instrument Bias</h1>
 </div>
 
 
@@ -132,6 +132,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Weak Instrument Bias occurs when Instrumental Variables (IVs) are only <strong>weakly</strong> associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.</p>
+<p>Methods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.</p>
+<p>When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.</p>
 
 
 

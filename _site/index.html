@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Statistical Genetics Collider Correction (MR)</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -140,15 +140,14 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-collider-bias" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-collider-bias"><strong>What is Collider Bias?</strong></h2>
-<p>In statistics, a <strong>collider</strong> is a variable that is <strong>causally associated with predictors X and Y</strong>. Including colliders in a model leads to <strong>collider bias</strong> because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.<br>
-</p>
-<p>[Add collider dag]</p>
+<p>In statistics, a <strong>collider</strong> is a variable that is <strong>causally associated with predictors X and Y</strong>. Including colliders in a model leads to <strong>collider bias</strong> because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.</p>
+<p><img src="images/Collider Basic DAG.png" class="img-fluid" width="850"></p>
 <p>An example of collider bias is Berkson’s Bias. Berkson demonstrated how <strong>two diseases that are unrelated in the general population</strong>, like gallbladder inflammation and diabetes, <strong>can become spuriously associated when a sample is restricted to individuals in a hospital,</strong> because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population. If we looked at the general population, we would not see this association, so <strong>the collider variable “hospital” is introducing the bias.</strong></p>
-<p>[Add Hospital Image]</p>
+<p><img src="images/Hospital DAG.png" class="img-fluid" width="850"></p>
 <p>Usually, scientists have <strong>removed</strong> colliders from their models to escape this bias. However, we suggest that scientists implement <strong>collider correction methods</strong> to retain the important predictive information from the collider variable while still producing an unbiased model.<br>
 </p>
 <p>For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using <strong>2-Stage Mendelian Randomization</strong>. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.</p>
-<p>Table of Contents:</p>
+<p><strong>Table of Contents:</strong></p>
 <ol type="1">
 <li><p>Homepage</p></li>
 <li><p>Statistical Genetics Collider Correction (MR)</p></li>

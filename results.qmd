@@ -10,7 +10,7 @@ title: "Other Collider Correction Methods"
 
 ## **Slope-Hunter**
 
-The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies esposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV's are used to produce a new slope that has adjusted for the effect of the Collider Variables.
+The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV's are used to produce a new slope that has adjusted for the effect of the Collider Variables.
 
 This model assumes that its model based clustering algorithm has **correctly** identified the instrumental variables. If these IV's were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists and the results are inaccurate.
 
