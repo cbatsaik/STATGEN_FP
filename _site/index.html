@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Collider Bias – STATGEN_FP</title>
+<title>Introduction to Our Project – STATGEN_FP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,10 +112,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-collider-bias" id="toc-what-is-collider-bias" class="nav-link active" data-scroll-target="#what-is-collider-bias"><strong>What is Collider Bias?</strong></a></li>
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link active" data-scroll-target="#table-of-contents"><strong>Table of Contents:</strong></a></li>
+  <li><a href="#what-is-collider-bias" id="toc-what-is-collider-bias" class="nav-link" data-scroll-target="#what-is-collider-bias"><strong>What is Collider Bias?</strong></a></li>
   <li><a href="#berksons-bias" id="toc-berksons-bias" class="nav-link" data-scroll-target="#berksons-bias">Berkson’s Bias</a></li>
   <li><a href="#how-do-we-deal-with-it" id="toc-how-do-we-deal-with-it" class="nav-link" data-scroll-target="#how-do-we-deal-with-it">How do we Deal With it?</a></li>
-  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents"><strong>Table of Contents:</strong></a></li>
+  <li><a href="#collider-bias-in-genetic-studies" id="toc-collider-bias-in-genetic-studies" class="nav-link" data-scroll-target="#collider-bias-in-genetic-studies">Collider Bias in Genetic Studies</a></li>
   </ul>
 </nav>
     </div>
@@ -124,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Collider Bias</h1>
+<h1 class="title">Introduction to Our Project</h1>
 </div>
 
 
@@ -141,6 +142,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents"><strong>Table of Contents:</strong></h2>
+<ol type="1">
+<li><p>Introduction to our Project</p>
+<ol type="1">
+<li><p>What is Collider Bias</p></li>
+<li><p>How is this Related to Statistical Genetics?</p></li>
+</ol></li>
+<li><p>Implementation</p>
+<ol type="1">
+<li><p>Simulating Our Data</p></li>
+<li><p>Mendelian Randomization</p></li>
+<li><p>Instrument Variables</p></li>
+<li><p>Results</p></li>
+</ol></li>
+<li><p>Limitations</p>
+<ol type="1">
+<li>Weak instrument Bias</li>
+</ol></li>
+<li><p>Other Existing Methods</p>
+<ol type="1">
+<li><p>Instrument Effect Regression Method</p></li>
+<li><p>Corrected Weighted Least Squares Method</p></li>
+<li><p>Slope-Hunter Method</p></li>
+</ol></li>
+<li><p>Sources</p></li>
+</ol>
+</section>
 <section id="what-is-collider-bias" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-collider-bias"><strong>What is Collider Bias?</strong></h2>
 <p><strong>A collider is a variable caused by both X and Y</strong>, and including it in a model <strong>leads to bias</strong> because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.&nbsp;</p>
@@ -159,19 +188,10 @@ ul.task-list li input[type="checkbox"] {
 <p>Usually, scientists have <strong>removed</strong> colliders from their models to escape this bias. However, we suggest that scientists implement <strong>collider correction methods</strong> to retain the important predictive information from the collider variable while still producing an unbiased model.</p>
 <p>For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using <strong>2-Stage Mendelian Randomization</strong>. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.</p>
 </section>
-<section id="table-of-contents" class="level2">
-<h2 class="anchored" data-anchor-id="table-of-contents"><strong>Table of Contents:</strong></h2>
-<ol type="1">
-<li><p>Homepage</p></li>
-<li><p>Collider Correction</p></li>
-<li><p>Weak Instrument Bias</p></li>
-<li><p>Other Collider Correction Methods</p>
-<ol type="1">
-<li><p>Instrument Effect Regression Method</p></li>
-<li><p>Corrected Weighted Least Squares Method</p></li>
-<li><p>Slope-Hunter Method</p></li>
-</ol></li>
-</ol>
+<section id="collider-bias-in-genetic-studies" class="level2">
+<h2 class="anchored" data-anchor-id="collider-bias-in-genetic-studies">Collider Bias in Genetic Studies</h2>
+<p>For example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it.&nbsp;</p>
+<p>Many genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies.&nbsp;Because of this, we wanted to explore <strong>correction methods</strong> for how to adjust for a collider that has been included in a Genome Wide Association Study.</p>
 
 
 </section>

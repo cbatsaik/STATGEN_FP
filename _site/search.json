@@ -9,16 +9,16 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Collider Bias",
+    "title": "Introduction to Our Project",
     "section": "",
-    "text": "A collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
+    "text": "Introduction to our Project\n\nWhat is Collider Bias\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nMendelian Randomization\nInstrument Variables\nResults\n\nLimitations\n\nWeak instrument Bias\n\nOther Existing Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources"
   },
   {
     "objectID": "index.html#what-is-collider-bias",
     "href": "index.html#what-is-collider-bias",
-    "title": "Collider Bias",
-    "section": "",
-    "text": "A collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
+    "title": "Introduction to Our Project",
+    "section": "What is Collider Bias?",
+    "text": "What is Collider Bias?\nA collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
   },
   {
     "objectID": "methods.html",
@@ -86,22 +86,29 @@
   {
     "objectID": "index.html#berksons-bias",
     "href": "index.html#berksons-bias",
-    "title": "Collider Bias",
+    "title": "Introduction to Our Project",
     "section": "Berkson’s Bias",
     "text": "Berkson’s Bias\nHow exactly does the inclusion of a collider cause bias? Physician and statistician Joseph Berkson helped explain this with a paradoxical example, which is why Collider bias is also known as Berkson’s bias. \nHe demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.\nIf we looked at the general population, we would not see this association, so adjusting for the collider variable “hospital” is introducing the bias."
   },
   {
     "objectID": "index.html#how-do-we-deal-with-it",
     "href": "index.html#how-do-we-deal-with-it",
-    "title": "Collider Bias",
+    "title": "Introduction to Our Project",
     "section": "How do we Deal With it?",
     "text": "How do we Deal With it?\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them."
   },
   {
     "objectID": "index.html#table-of-contents",
     "href": "index.html#table-of-contents",
-    "title": "Collider Bias",
-    "section": "Table of Contents:",
-    "text": "Table of Contents:\n\nHomepage\nCollider Correction\nWeak Instrument Bias\nOther Collider Correction Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method"
+    "title": "Introduction to Our Project",
+    "section": "",
+    "text": "Introduction to our Project\n\nWhat is Collider Bias\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nMendelian Randomization\nInstrument Variables\nResults\n\nLimitations\n\nWeak instrument Bias\n\nOther Existing Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources"
+  },
+  {
+    "objectID": "index.html#collider-bias-in-genetic-studies",
+    "href": "index.html#collider-bias-in-genetic-studies",
+    "title": "Introduction to Our Project",
+    "section": "Collider Bias in Genetic Studies",
+    "text": "Collider Bias in Genetic Studies\nFor example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. \nMany genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore correction methods for how to adjust for a collider that has been included in a Genome Wide Association Study."
   }
 ]

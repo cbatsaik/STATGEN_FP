@@ -1,6 +1,38 @@
 ---
-title: "Collider Bias"
+title: "Introduction to Our Project"
 ---
+
+## **Table of Contents:**
+
+1.  Introduction to our Project
+
+    1.  What is Collider Bias
+
+    2.  How is this Related to Statistical Genetics?
+
+2.  Implementation
+
+    1.  Simulating Our Data
+
+    2.  Mendelian Randomization
+
+    3.  Instrument Variables
+
+    4.  Results
+
+3.  Limitations
+
+    1.  Weak instrument Bias
+
+4.  Other Existing Methods
+
+    1.  Instrument Effect Regression Method
+
+    2.  Corrected Weighted Least Squares Method
+
+    3.  Slope-Hunter Method
+
+5.  Sources
 
 ## **What is Collider Bias?**
 
@@ -26,18 +58,8 @@ Usually, scientists have **removed** colliders from their models to escape this 
 
 For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using **2-Stage Mendelian Randomization**. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.
 
-## **Table of Contents:**
+## Collider Bias in Genetic Studies
 
-1.  Homepage
+For example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. 
 
-2.  Collider Correction
-
-3.  Weak Instrument Bias
-
-4.  Other Collider Correction Methods
-
-    1.  Instrument Effect Regression Method
-
-    2.  Corrected Weighted Least Squares Method
-
-    3.  Slope-Hunter Method
+Many genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore **correction methods** for how to adjust for a collider that has been included in a Genome Wide Association Study.
