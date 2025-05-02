@@ -9,13 +9,17 @@ subtitle: "Collider Correction Methods to Explore Further"
 
 The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV's are used to produce a new slope that has adjusted for the effect of the Collider Variables.
 
-This model assumes that its model based clustering algorithm has **correctly** identified the instrumental variables. If these IV's were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists and the results are inaccurate.
+![](images/Slope-Hunter.png)
+
+The Slope-Hunter method assumes that its model based clustering algorithm has **correctly** identified the instrumental variables. If these IV's were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists.
+
+An R package called [SlopeHunter by Osmahmoud](https://github.com/Osmahmoud/SlopeHunter?tab=readme-ov-file) exists to use the Slope-Hunter method for collider bias correction.
 
 ## Corrected Weighted Least Squares
 
 The Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.
 
-**Instructions for correction:**
+Instructions for correction:
 
 1.  Install ColliderBias package by Siyang Cai and load library.
 2.  Use methodCB() function to assign the arguments to your GWAS output data.
@@ -26,6 +30,7 @@ The Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses I
 
 CWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS).
 
-There also exists a **Corrected Weighted Bivariate Least Squares** (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.
+There also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.
 
-To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association between exposure and collider. This method will also produce b.se which represents the standard error of b. To interpret the standard error, previous work recommends using bootstrapping.
+To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association. 
+
