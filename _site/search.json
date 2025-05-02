@@ -1,14 +1,21 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Implementation",
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "Limitations",
     "section": "",
-    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest. \n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course. \nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
+    "text": "Weak Instrument Bias occurs when Instrumental Variables (IVs) are only weakly associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.\nMethods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.\nWhen choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
+    "title": "Introduction to Our Project",
+    "section": "",
+    "text": "Introduction to our Project\n\nWhat is Collider Bias\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nMendelian Randomization\nInstrument Variables\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Existing Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources"
+  },
+  {
+    "objectID": "index.html#table-of-contents",
+    "href": "index.html#table-of-contents",
     "title": "Introduction to Our Project",
     "section": "",
     "text": "Introduction to our Project\n\nWhat is Collider Bias\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nMendelian Randomization\nInstrument Variables\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Existing Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources"
@@ -21,11 +28,25 @@
     "text": "What is Collider Bias?\nA collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
   },
   {
-    "objectID": "methods.html",
-    "href": "methods.html",
-    "title": "Limitations",
-    "section": "",
-    "text": "Weak Instrument Bias occurs when Instrumental Variables (IVs) are only weakly associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.\nMethods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.\nWhen choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results."
+    "objectID": "index.html#berksons-bias",
+    "href": "index.html#berksons-bias",
+    "title": "Introduction to Our Project",
+    "section": "Berkson’s Bias",
+    "text": "Berkson’s Bias\nHow exactly does the inclusion of a collider cause bias? Physician and statistician Joseph Berkson helped explain this with a paradoxical example, which is why Collider bias is also known as Berkson’s bias. \nHe demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.\nIf we looked at the general population, we would not see this association, so adjusting for the collider variable “hospital” is introducing the bias."
+  },
+  {
+    "objectID": "index.html#how-do-we-deal-with-it",
+    "href": "index.html#how-do-we-deal-with-it",
+    "title": "Introduction to Our Project",
+    "section": "How do we Deal With it?",
+    "text": "How do we Deal With it?\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them."
+  },
+  {
+    "objectID": "index.html#collider-bias-in-genetic-studies",
+    "href": "index.html#collider-bias-in-genetic-studies",
+    "title": "Introduction to Our Project",
+    "section": "Collider Bias in Genetic Studies",
+    "text": "Collider Bias in Genetic Studies\nFor example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. \nMany genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore correction methods for how to adjust for a collider that has been included in a Genome Wide Association Study."
   },
   {
     "objectID": "results.html#slope-hunter",
@@ -42,6 +63,20 @@
     "text": "Corrected Weighted Least Squares\nThe Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.\nInstructions for correction:\n\nInstall ColliderBias package by Siyang Cai and load library.\nUse methodCB() function to assign the arguments to your GWAS output data.\nSpecified the method in methodCB() to “CWLS” for the type of correction we are using.\nInterpret the output values! The most important for CWLS are b and b_cor:\n\nb: The coefficient of the regression (slope) of ybeta[prune] on xbeta[prune], after correction for regression dilution.\nb_cor: The adjusted slope that compares the biased slope to the corrected slope.\n\n\nCWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS).\nThere also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.\nTo implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association between exposure and collider. This method will also produce b.se which represents the standard error of b. To interpret the standard error, previous work recommends using bootstrapping."
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Implementation",
+    "section": "",
+    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
+  },
+  {
+    "objectID": "about.html#simulating-our-data",
+    "href": "about.html#simulating-our-data",
+    "title": "Implementation",
+    "section": "",
+    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
+  },
+  {
     "objectID": "about.html#mendelian-randomization",
     "href": "about.html#mendelian-randomization",
     "title": "Implementation",
@@ -49,11 +84,11 @@
     "text": "Mendelian Randomization\nIn our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.\nMendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height."
   },
   {
-    "objectID": "about.html#ivs",
-    "href": "about.html#ivs",
-    "title": "Collider Correction in Statistical Genetics",
-    "section": "IVs",
-    "text": "IVs\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
+    "objectID": "about.html#instrument-variables",
+    "href": "about.html#instrument-variables",
+    "title": "Implementation",
+    "section": "Instrument Variables",
+    "text": "Instrument Variables\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
   },
   {
     "objectID": "about.html#the-2-stage-method",
@@ -75,47 +110,5 @@
     "title": "Implementation",
     "section": "Our Results",
     "text": "Our Results\nThis is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.\n\nAs you can see, the result is very far from the red line, meaning we’re seeing inflated test statistics. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.\n\nThis QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. \nAs you can see, the points aren’t perfect but they fall much closer to the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the inflated test statistics we were seeing before!\nResults of our Study: Mendelian randomization helped eliminate much of the bias introduced by our collider variable height when modeling binary sex as an outcome of SNPs."
-  },
-  {
-    "objectID": "about.html#instrument-variables",
-    "href": "about.html#instrument-variables",
-    "title": "Implementation",
-    "section": "Instrument Variables",
-    "text": "Instrument Variables\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
-  },
-  {
-    "objectID": "index.html#berksons-bias",
-    "href": "index.html#berksons-bias",
-    "title": "Introduction to Our Project",
-    "section": "Berkson’s Bias",
-    "text": "Berkson’s Bias\nHow exactly does the inclusion of a collider cause bias? Physician and statistician Joseph Berkson helped explain this with a paradoxical example, which is why Collider bias is also known as Berkson’s bias. \nHe demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.\nIf we looked at the general population, we would not see this association, so adjusting for the collider variable “hospital” is introducing the bias."
-  },
-  {
-    "objectID": "index.html#how-do-we-deal-with-it",
-    "href": "index.html#how-do-we-deal-with-it",
-    "title": "Introduction to Our Project",
-    "section": "How do we Deal With it?",
-    "text": "How do we Deal With it?\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them."
-  },
-  {
-    "objectID": "index.html#table-of-contents",
-    "href": "index.html#table-of-contents",
-    "title": "Introduction to Our Project",
-    "section": "",
-    "text": "Introduction to our Project\n\nWhat is Collider Bias\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nMendelian Randomization\nInstrument Variables\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Existing Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources"
-  },
-  {
-    "objectID": "index.html#collider-bias-in-genetic-studies",
-    "href": "index.html#collider-bias-in-genetic-studies",
-    "title": "Introduction to Our Project",
-    "section": "Collider Bias in Genetic Studies",
-    "text": "Collider Bias in Genetic Studies\nFor example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. \nMany genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore correction methods for how to adjust for a collider that has been included in a Genome Wide Association Study."
-  },
-  {
-    "objectID": "about.html#simulating-our-data",
-    "href": "about.html#simulating-our-data",
-    "title": "Implementation",
-    "section": "",
-    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest. \n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course. \nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
   }
 ]
