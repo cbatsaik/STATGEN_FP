@@ -11,14 +11,14 @@
     "href": "index.html",
     "title": "Collider Bias",
     "section": "",
-    "text": "In statistics, a collider is a variable that is causally associated with predictors X and Y. Including colliders in a model leads to collider bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.\n\nAn example of collider bias is Berkson’s Bias. Berkson demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population. If we looked at the general population, we would not see this association, so the collider variable “hospital” is introducing the bias.\n\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\n\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.\nTable of Contents:\n\nHomepage\nStatistical Genetics Collider Correction (MR)\nWeak Instrument Bias\nOther Collider Correction Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method"
+    "text": "A collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
   },
   {
     "objectID": "index.html#what-is-collider-bias",
     "href": "index.html#what-is-collider-bias",
     "title": "Collider Bias",
     "section": "",
-    "text": "In statistics, a collider is a variable that is causally associated with predictors X and Y. Including colliders in a model leads to collider bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.\n\nAn example of collider bias is Berkson’s Bias. Berkson demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population. If we looked at the general population, we would not see this association, so the collider variable “hospital” is introducing the bias.\n\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\n\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.\nTable of Contents:\n\nHomepage\nStatistical Genetics Collider Correction (MR)\nWeak Instrument Bias\nOther Collider Correction Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method"
+    "text": "A collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
   },
   {
     "objectID": "methods.html",
@@ -82,5 +82,26 @@
     "title": "Collider Correction in Statistical Genetics",
     "section": "Instrument Variables",
     "text": "Instrument Variables\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
+  },
+  {
+    "objectID": "index.html#berksons-bias",
+    "href": "index.html#berksons-bias",
+    "title": "Collider Bias",
+    "section": "Berkson’s Bias",
+    "text": "Berkson’s Bias\nHow exactly does the inclusion of a collider cause bias? Physician and statistician Joseph Berkson helped explain this with a paradoxical example, which is why Collider bias is also known as Berkson’s bias. \nHe demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.\nIf we looked at the general population, we would not see this association, so adjusting for the collider variable “hospital” is introducing the bias."
+  },
+  {
+    "objectID": "index.html#how-do-we-deal-with-it",
+    "href": "index.html#how-do-we-deal-with-it",
+    "title": "Collider Bias",
+    "section": "How do we Deal With it?",
+    "text": "How do we Deal With it?\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them."
+  },
+  {
+    "objectID": "index.html#table-of-contents",
+    "href": "index.html#table-of-contents",
+    "title": "Collider Bias",
+    "section": "Table of Contents:",
+    "text": "Table of Contents:\n\nHomepage\nCollider Correction\nWeak Instrument Bias\nOther Collider Correction Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method"
   }
 ]
