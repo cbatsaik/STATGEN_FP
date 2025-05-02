@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Collider Correction in Statistical Genetics – STATGEN_FP</title>
+<title>Implementation – STATGEN_FP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,7 +112,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mendelian-randomization" id="toc-mendelian-randomization" class="nav-link active" data-scroll-target="#mendelian-randomization"><strong>Mendelian Randomization</strong></a></li>
+  <li><a href="#simulating-our-data" id="toc-simulating-our-data" class="nav-link active" data-scroll-target="#simulating-our-data"><strong>Simulating Our Data</strong></a></li>
+  <li><a href="#mendelian-randomization" id="toc-mendelian-randomization" class="nav-link" data-scroll-target="#mendelian-randomization"><strong>Mendelian Randomization</strong></a></li>
   <li><a href="#instrument-variables" id="toc-instrument-variables" class="nav-link" data-scroll-target="#instrument-variables"><strong>Instrument Variables</strong></a></li>
   <li><a href="#the-2-stage-method" id="toc-the-2-stage-method" class="nav-link" data-scroll-target="#the-2-stage-method"><strong>The 2-Stage Method:</strong></a></li>
   <li><a href="#why-this-method" id="toc-why-this-method" class="nav-link" data-scroll-target="#why-this-method"><strong>Why this method?</strong></a></li>
@@ -125,7 +126,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Collider Correction in Statistical Genetics</h1>
+<h1 class="title">Implementation</h1>
+<p class="subtitle lead">Collider Correction in Statistical Genetics</p>
 </div>
 
 
@@ -142,6 +144,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="simulating-our-data" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-our-data"><strong>Simulating Our Data</strong></h2>
+<p>For our study, we used <strong>simulated data to learn about collider bias in genome wide association studies</strong>. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.&nbsp;</p>
+<ul>
+<li><p>Our <strong>exposure</strong> (X)variable is our <strong>SNPs.</strong> We got this genotype data from assignment Lab 2 from our course.&nbsp;</p></li>
+<li><p>Our <strong>outcome</strong> (Y) variable is <strong>sex</strong>. This is binary and we created this variable so that it is not at all caused by SNPs</p></li>
+<li><p>Our <strong>collider</strong> variable is <strong>height.</strong> We created this variable to be caused by both SNPs and sex.</p></li>
+</ul>
+<p>Looking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. <strong>The more that the points lie on a straight diagonal line, the more normally distributed the data.</strong></p>
+<p><img src="images/basic qq.jpg" class="img-fluid" width="750"></p>
+<p>This QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely <strong>along</strong> the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias.</p>
+</section>
 <section id="mendelian-randomization" class="level2">
 <h2 class="anchored" data-anchor-id="mendelian-randomization"><strong>Mendelian Randomization</strong></h2>
 <p>In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.</p>
@@ -174,6 +188,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.</p>
 <p><img src="images/qq plot height bad.jpg" class="img-fluid" width="750"></p>
 <p>As you can see, the result is <strong>very far</strong> from the red line, meaning we’re seeing <strong>inflated test statistics</strong>. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.</p>
+<p><img src="images/qq plot correction good.jpg" class="img-fluid" width="750"></p>
 <p>This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex.&nbsp;</p>
 <p>As you can see, the points aren’t perfect but they fall <strong>much closer to</strong> the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the <strong>inflated test statistics</strong> we were seeing before!</p>
 <p><strong>Results of our Study:</strong> Mendelian randomization <strong>helped eliminate much of the bias</strong> introduced by our collider variable height when modeling binary sex as an outcome of SNPs.&nbsp;</p>

@@ -1,6 +1,23 @@
 ---
-title: "Collider Correction in Statistical Genetics"
+title: "Implementation"
+subtitle: "Collider Correction in Statistical Genetics"
 ---
+
+## **Simulating Our Data**
+
+For our study, we used **simulated data to learn about collider bias in genome wide association studies**. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest. 
+
+-   Our **exposure** (X)variable is our **SNPs.** We got this genotype data from assignment Lab 2 from our course. 
+
+-   Our **outcome** (Y) variable is **sex**. This is binary and we created this variable so that it is not at all caused by SNPs
+
+-   Our **collider** variable is **height.** We created this variable to be caused by both SNPs and sex.
+
+Looking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. **The more that the points lie on a straight diagonal line, the more normally distributed the data.**
+
+![](images/basic qq.jpg){width="750"}
+
+This QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely **along** the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias.
 
 ## **Mendelian Randomization**
 
@@ -43,6 +60,8 @@ This is what the QQ plot looked like from when we ran a GWAS regressing sex on S
 ![](images/qq plot height bad.jpg){width="750"}
 
 As you can see, the result is **very far** from the red line, meaning we’re seeing **inflated test statistics**. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.
+
+![](images/qq plot correction good.jpg){width="750"}
 
 This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. 
 

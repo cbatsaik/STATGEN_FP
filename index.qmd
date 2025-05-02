@@ -22,7 +22,7 @@ title: "Introduction to Our Project"
 
 3.  Limitations
 
-    1.  Weak instrument Bias
+    1.  Weak Instrument Bias
 
 4.  Other Existing Methods
 

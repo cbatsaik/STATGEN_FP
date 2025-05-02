@@ -1,5 +1,6 @@
 ---
-title: "Other Collider Correction Methods"
+title: "Other Existing Methods"
+subtitle: "Collider Correction Methods to Explore Further"
 ---
 
 ## **Instrument Effect Regression**

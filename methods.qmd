@@ -1,5 +1,6 @@
 ---
-title: "Weak Instrument Bias"
+title: "Limitations"
+subtitle: "Weak Instrument Bias"
 ---
 
 Weak Instrument Bias occurs when Instrumental Variables (IVs) are only **weakly** associated with the collider variable. This bias causes Type 1 Error since the IVs don't explain sufficient amounts of variation in the collider variable.
