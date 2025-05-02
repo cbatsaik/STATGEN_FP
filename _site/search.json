@@ -1,10 +1,52 @@
 [
   {
-    "objectID": "methods.html",
-    "href": "methods.html",
-    "title": "Limitations",
+    "objectID": "implementation.html",
+    "href": "implementation.html",
+    "title": "Implementation",
     "section": "",
-    "text": "Weak Instrument Bias occurs when Instrumental Variables (IVs) are only weakly associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.\nMethods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.\nWhen choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results."
+    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
+  },
+  {
+    "objectID": "implementation.html#simulating-our-data",
+    "href": "implementation.html#simulating-our-data",
+    "title": "Implementation",
+    "section": "",
+    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
+  },
+  {
+    "objectID": "implementation.html#mendelian-randomization",
+    "href": "implementation.html#mendelian-randomization",
+    "title": "Implementation",
+    "section": "Mendelian Randomization",
+    "text": "Mendelian Randomization\nIn our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.\nMendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height."
+  },
+  {
+    "objectID": "implementation.html#instrument-variables",
+    "href": "implementation.html#instrument-variables",
+    "title": "Implementation",
+    "section": "Instrument Variables",
+    "text": "Instrument Variables\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
+  },
+  {
+    "objectID": "implementation.html#the-2-stage-method",
+    "href": "implementation.html#the-2-stage-method",
+    "title": "Implementation",
+    "section": "The 2-Stage Method:",
+    "text": "The 2-Stage Method:\n\nIn this first regression, we model Height as a function of the SNPs. The output is a new variable, genetically predicted height or . This captures only the part of height that is driven by someone genes.\nWe then use hat height as the predictor in a second regression, where Sex is the outcome. Because hat height is driven only by random genetic variation, it is free of confounding or collider bias.\nThe coefficient from this regression tells us: If someone’s height changed purely due to genetic reasons, would that change their odds of being Sex=1?"
+  },
+  {
+    "objectID": "implementation.html#why-this-method",
+    "href": "implementation.html#why-this-method",
+    "title": "Implementation",
+    "section": "Why this method?",
+    "text": "Why this method?\nMethods like Wald Ratio, Inverse Variance Weighting, MR-Egger, and TwoSampleMR are designed for settings where you only have summary GWAS results for the exposure and outcome from different cohorts. In contrast, 2SLS works directly with individual-level genotype and phenotype data like our simulated data.\nMethods like MR-Egger are built to detect and correct for pleiotropy, which is when SNPs affect the outcome through other pathways besides the exposure, but in our simulation, we intentionally designed the SNPs to influence only height, not sex directly, so there’s no pleiotropy to correct."
+  },
+  {
+    "objectID": "implementation.html#our-results",
+    "href": "implementation.html#our-results",
+    "title": "Implementation",
+    "section": "Our Results",
+    "text": "Our Results\nThis is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.\n\nAs you can see, the result is very far from the red line, meaning we’re seeing inflated test statistics. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.\n\nThis QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. \nAs you can see, the points aren’t perfect but they fall much closer to the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the inflated test statistics we were seeing before!\nResults of our Study: Mendelian randomization helped eliminate much of the bias introduced by our collider variable height when modeling binary sex as an outcome of SNPs."
   },
   {
     "objectID": "index.html",
@@ -63,52 +105,10 @@
     "text": "Corrected Weighted Least Squares\nThe Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.\nInstructions for correction:\n\nInstall ColliderBias package by Siyang Cai and load library.\nUse methodCB() function to assign the arguments to your GWAS output data.\nSpecified the method in methodCB() to “CWLS” for the type of correction we are using.\nInterpret the output values! The most important for CWLS are b and b_cor:\n\nb: The coefficient of the regression (slope) of ybeta[prune] on xbeta[prune], after correction for regression dilution.\nb_cor: The adjusted slope that compares the biased slope to the corrected slope.\n\n\nCWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS).\nThere also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.\nTo implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association between exposure and collider. This method will also produce b.se which represents the standard error of b. To interpret the standard error, previous work recommends using bootstrapping."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Implementation",
+    "objectID": "methods.html",
+    "href": "methods.html",
+    "title": "Limitations",
     "section": "",
-    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
-  },
-  {
-    "objectID": "about.html#simulating-our-data",
-    "href": "about.html#simulating-our-data",
-    "title": "Implementation",
-    "section": "",
-    "text": "For our study, we used simulated data to learn about collider bias in genome wide association studies. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.\n\nOur exposure (X)variable is our SNPs. We got this genotype data from assignment Lab 2 from our course.\nOur outcome (Y) variable is sex. This is binary and we created this variable so that it is not at all caused by SNPs\nOur collider variable is height. We created this variable to be caused by both SNPs and sex.\n\nLooking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. The more that the points lie on a straight diagonal line, the more normally distributed the data.\n\nThis QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely along the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias."
-  },
-  {
-    "objectID": "about.html#mendelian-randomization",
-    "href": "about.html#mendelian-randomization",
-    "title": "Implementation",
-    "section": "Mendelian Randomization",
-    "text": "Mendelian Randomization\nIn our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.\nMendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height."
-  },
-  {
-    "objectID": "about.html#instrument-variables",
-    "href": "about.html#instrument-variables",
-    "title": "Implementation",
-    "section": "Instrument Variables",
-    "text": "Instrument Variables\nAn instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:\n\nPredict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.\nAffect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.\nBe independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.\n\nIn our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise."
-  },
-  {
-    "objectID": "about.html#the-2-stage-method",
-    "href": "about.html#the-2-stage-method",
-    "title": "Implementation",
-    "section": "The 2-Stage Method:",
-    "text": "The 2-Stage Method:\n\nIn this first regression, we model Height as a function of the SNPs. The output is a new variable, genetically predicted height or . This captures only the part of height that is driven by someone genes.\nWe then use hat height as the predictor in a second regression, where Sex is the outcome. Because hat height is driven only by random genetic variation, it is free of confounding or collider bias.\nThe coefficient from this regression tells us: If someone’s height changed purely due to genetic reasons, would that change their odds of being Sex=1?"
-  },
-  {
-    "objectID": "about.html#why-this-method",
-    "href": "about.html#why-this-method",
-    "title": "Implementation",
-    "section": "Why this method?",
-    "text": "Why this method?\nMethods like Wald Ratio, Inverse Variance Weighting, MR-Egger, and TwoSampleMR are designed for settings where you only have summary GWAS results for the exposure and outcome from different cohorts. In contrast, 2SLS works directly with individual-level genotype and phenotype data like our simulated data.\nMethods like MR-Egger are built to detect and correct for pleiotropy, which is when SNPs affect the outcome through other pathways besides the exposure, but in our simulation, we intentionally designed the SNPs to influence only height, not sex directly, so there’s no pleiotropy to correct."
-  },
-  {
-    "objectID": "about.html#our-results",
-    "href": "about.html#our-results",
-    "title": "Implementation",
-    "section": "Our Results",
-    "text": "Our Results\nThis is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.\n\nAs you can see, the result is very far from the red line, meaning we’re seeing inflated test statistics. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.\n\nThis QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. \nAs you can see, the points aren’t perfect but they fall much closer to the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the inflated test statistics we were seeing before!\nResults of our Study: Mendelian randomization helped eliminate much of the bias introduced by our collider variable height when modeling binary sex as an outcome of SNPs."
+    "text": "Weak Instrument Bias occurs when Instrumental Variables (IVs) are only weakly associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.\nMethods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.\nWhen choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results."
   }
 ]
