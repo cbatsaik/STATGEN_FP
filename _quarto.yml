@@ -7,7 +7,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+      - href: methods.qmd
+        text: Methods
+      - href: results.qmd
+        text: Results
 
 format:
   html:
@@ -16,4 +21,3 @@ format:
     toc: true
 
 editor: visual
-

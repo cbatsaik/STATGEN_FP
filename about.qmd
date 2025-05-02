@@ -5,9 +5,9 @@ subtitle: "Collider Correction in Statistical Genetics"
 
 ## **Simulating Our Data**
 
-For our study, we used **simulated data to learn about collider bias in genome wide association studies**. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest. 
+For our study, we used **simulated data to learn about collider bias in genome wide association studies**. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.
 
--   Our **exposure** (X)variable is our **SNPs.** We got this genotype data from assignment Lab 2 from our course. 
+-   Our **exposure** (X)variable is our **SNPs.** We got this genotype data from assignment Lab 2 from our course.
 
 -   Our **outcome** (Y) variable is **sex**. This is binary and we created this variable so that it is not at all caused by SNPs
 
