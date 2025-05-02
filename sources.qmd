@@ -1,3 +1,28 @@
 ---
 title: "Sources"
 ---
+
+## Scientific Literature Review
+
+Felix R. Day, Po-Ru Loh, Robert A. Scott, Ken K. Ong, John R.B. Perry “A Robust Example of Collider Bias in a Genetic Association Study” https://www.cell.com/ajhg/fulltext/S0002-9297(15)00514-5
+
+Grinde, Kelsey E., et al. “Adjusting for Principal Components Can Induce Collider Bias in Genome-Wide Association Studies.” PLoS Genetics, vol. 20, no. 12, 2024, p. e1011242, https://doi.org/10.1371/journal.pgen.1011242.
+
+Mahmoud, O., Dudbridge, F., Davey Smith, G. et al. A robust method for collider bias correction in conditional genome-wide association studies. Nat Commun 13, 619 (2022). https://doi.org/10.1038/s41467-022-28119-9
+
+Mitchell, R. E., Hartley, A. E., Walker, V. M., Gkatzionis, A., Yarmolinsky, J., Bell, J. A., Chong, A. H. W., Paternoster, L., Tilling, K., & Smith, G. D. (n.d.). Strategies to investigate and mitigate collider bias in genetic and mendelian randomisation studies of disease progression. PLOS Genetics. https://journals.plos.org/plosgenetics/article?id=10.1371%2Fjournal.pgen.1010596
+
+Sun, Yan V., et al. “Identification and Correction for Collider Bias in a Genome-Wide Association Study of Diabetes-Related Heart Failure.” The American Journal of Human Genetics, vol. 111, no. 7, 2024, pp. 1481–93, https://doi.org/10.1016/j.ajhg.2024.05.018. 
+
+## R Packages
+
+Dudbridge F, Cai S (2025). _ColliderBias: Adjust collider bias and weak instrument bias
+  in Mendelian Randomisation_. R package version 1.0.1, commit
+  66606d074c5cfd5263a0e2234ceb0a88fc9fdbc1, <https://github.com/SiyangCai/ColliderBias>
+
+## Other Helpful Resources
+
+https://lmyint.github.io/causal_fall_2024/
+
+https://mac-stat.github.io/statgen/
+

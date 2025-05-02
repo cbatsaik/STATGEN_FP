@@ -1,0 +1,70 @@
+---
+title: "Implementation"
+subtitle: "Collider Correction in Statistical Genetics"
+---
+
+## **Simulating Our Data**
+
+For our study, we used **simulated data to learn about collider bias in genome wide association studies**. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest. 
+
+-   Our **exposure** (X)variable is our **SNPs.** We got this genotype data from assignment Lab 2 from our course. 
+
+-   Our **outcome** (Y) variable is **sex**. This is binary and we created this variable so that it is not at all caused by SNPs
+
+-   Our **collider** variable is **height.** We created this variable to be caused by both SNPs and sex.
+
+Looking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. **The more that the points lie on a straight diagonal line, the more normally distributed the data.**
+
+![](images/basic qq.jpg){width="750"}
+
+This QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely **along** the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias.
+
+## **Mendelian Randomization**
+
+In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.
+
+Mendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height.
+
+## **Instrument Variables**
+
+An instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:
+
+1.  Predict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.
+
+2.  Affect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.
+
+3.  Be independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.
+
+In our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise.
+
+## **The 2-Stage Method:**
+
+![](images/Mr%20Implementation.jpg)
+
+In this first regression, we model Height as a function of the SNPs. The output is a new variable, genetically predicted height or \hat{height}. This captures only the part of height that is driven by someone genes.
+
+We then use hat height as the predictor in a second regression, where Sex is the outcome. Because hat height is driven only by random genetic variation, it is free of confounding or collider bias.
+
+The coefficient from this regression tells us: If someone’s height changed purely due to genetic reasons, would that change their odds of being Sex=1?
+
+## **Why this method?**
+
+Methods like Wald Ratio, Inverse Variance Weighting, MR-Egger, and TwoSampleMR are designed for settings where you only have summary GWAS results for the exposure and outcome from different cohorts. In contrast, 2SLS works directly with individual-level genotype and phenotype data like our simulated data.
+
+Methods like MR-Egger are built to detect and correct for pleiotropy, which is when SNPs affect the outcome through other pathways besides the exposure, but in our simulation, we intentionally designed the SNPs to influence only height, not sex directly, so there’s no pleiotropy to correct.
+
+## Our Results
+
+This is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.
+
+![](images/qq plot height bad.jpg){width="750"}
+
+As you can see, the result is **very far** from the red line, meaning we’re seeing **inflated test statistics**. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.
+
+![](images/qq plot correction good.jpg){width="750"}
+
+This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. 
+
+As you can see, the points aren’t perfect but they fall **much closer to** the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the **inflated test statistics** we were seeing before!
+
+**Results of our Study:** Mendelian randomization **helped eliminate much of the bias** introduced by our collider variable height when modeling binary sex as an outcome of SNPs. 

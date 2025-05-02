@@ -10,10 +10,12 @@ website:
       - href: implementation.qmd
         text: Implementation
       - href: methods.qmd
-        text: Methods
+        text: Limitations
       - href: results.qmd
-        text: Results
-
+        text: Other Methods
+      - href: sources.qmd
+        text: Sources
+        
 format:
   html:
     theme: cosmo

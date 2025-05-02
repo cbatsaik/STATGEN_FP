@@ -31,7 +31,7 @@ Instructions for correction:
 
 CWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS). 
 
-There also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome. 
+There also exists a **Corrected Weighted Bivariate Least Squares** (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome. 
 
 To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association between exposure and collider. This method will also produce b.se which represents the standard error of b. To interpret the standard error, previous work recommends using bootstrapping. 
 
