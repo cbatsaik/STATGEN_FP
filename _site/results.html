@@ -124,9 +124,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instrument-effect-regression" id="toc-instrument-effect-regression" class="nav-link active" data-scroll-target="#instrument-effect-regression"><strong>Instrument Effect Regression</strong></a></li>
-  <li><a href="#slope-hunter" id="toc-slope-hunter" class="nav-link" data-scroll-target="#slope-hunter"><strong>Slope-Hunter</strong></a></li>
-  <li><a href="#corrected-weighted-least-squares" id="toc-corrected-weighted-least-squares" class="nav-link" data-scroll-target="#corrected-weighted-least-squares"><strong>Corrected Weighted Least Squares</strong></a></li>
+  <li><a href="#instrument-effect-regression" id="toc-instrument-effect-regression" class="nav-link active" data-scroll-target="#instrument-effect-regression">Instrument Effect Regression</a></li>
+  <li><a href="#slope-hunter" id="toc-slope-hunter" class="nav-link" data-scroll-target="#slope-hunter">Slope-Hunter</a></li>
+  <li><a href="#corrected-weighted-least-squares" id="toc-corrected-weighted-least-squares" class="nav-link" data-scroll-target="#corrected-weighted-least-squares">Corrected Weighted Least Squares</a></li>
   </ul>
 </nav>
     </div>
@@ -154,17 +154,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="instrument-effect-regression" class="level2">
-<h2 class="anchored" data-anchor-id="instrument-effect-regression"><strong>Instrument Effect Regression</strong></h2>
+<h2 class="anchored" data-anchor-id="instrument-effect-regression">Instrument Effect Regression</h2>
 </section>
 <section id="slope-hunter" class="level2">
-<h2 class="anchored" data-anchor-id="slope-hunter"><strong>Slope-Hunter</strong></h2>
+<h2 class="anchored" data-anchor-id="slope-hunter">Slope-Hunter</h2>
 <p>The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV’s are used to produce a new slope that has adjusted for the effect of the Collider Variables.</p>
 <p>This model assumes that its model based clustering algorithm has <strong>correctly</strong> identified the instrumental variables. If these IV’s were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists and the results are inaccurate.</p>
 </section>
 <section id="corrected-weighted-least-squares" class="level2">
-<h2 class="anchored" data-anchor-id="corrected-weighted-least-squares"><strong>Corrected Weighted Least Squares</strong></h2>
+<h2 class="anchored" data-anchor-id="corrected-weighted-least-squares">Corrected Weighted Least Squares</h2>
 <p>The Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.</p>
-<p>Instructions for correction:</p>
+<p><strong>Instructions for correction:</strong></p>
 <ol type="1">
 <li>Install ColliderBias package by Siyang Cai and load library.</li>
 <li>Use methodCB() function to assign the arguments to your GWAS output data.</li>
