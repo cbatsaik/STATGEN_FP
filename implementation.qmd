@@ -68,3 +68,9 @@ This QQ plot shows that when happened when we used MR to correct for height in t
 As you can see, the points aren’t perfect but they fall **much closer to** the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the **inflated test statistics** we were seeing before!
 
 **Results of our Study:** Mendelian randomization **helped eliminate much of the bias** introduced by our collider variable height when modeling binary sex as an outcome of SNPs. 
+
+
+
+
+
+

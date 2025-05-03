@@ -2,16 +2,16 @@ project:
   type: website
 
 website:
-  title: "STATGEN_FP"
+  title: "Collider Bias in Statistical Genetics"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - href: implementation.qmd
         text: Implementation
-      - href: methods.qmd
+      - href: limitations.qmd
         text: Limitations
-      - href: results.qmd
+      - href: other_methods.qmd
         text: Other Methods
       - href: sources.qmd
         text: Sources

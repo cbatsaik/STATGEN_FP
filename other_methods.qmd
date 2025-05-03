@@ -34,3 +34,10 @@ There also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method th
 
 To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association. 
 
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ title: "Statistical Genetics Final Project"
 subtitle: "Project by: Charles Batsaikhan '25, Mikaely Evans '25, and Julia Ross '26"
 ---
 
-Final Project website for STAT 494. Course taught by Dr. Kelsey Grinde. Spring 2025, Macalester College.
+Final Project website for Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College.
 
 ## **Table of Contents**
 
@@ -16,10 +16,10 @@ Final Project website for STAT 494. Course taught by Dr. Kelsey Grinde. Spring 2
 2.  **Implementation**
 
     -   Simulating Our Data
+    
+    -   Instrument Variables
 
     -   Mendelian Randomization
-
-    -   Instrument Variables
 
     -   Results
 
@@ -72,3 +72,13 @@ For this project, we walk through an example of how to correct for collider bias
 For example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. 
 
 Many genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore **correction methods** for how to adjust for a collider that has been included in a Genome Wide Association Study.
+
+
+
+
+
+
+
+
+
+
