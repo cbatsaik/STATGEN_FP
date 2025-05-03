@@ -16,6 +16,10 @@ website:
         text: Other Methods
       - href: sources.qmd
         text: Sources
+    sidebar:
+    tools:
+      - icon: github
+        href: https://github.com/cbatsaik/STATGEN_FP
         
 format:
   html:
@@ -24,3 +28,6 @@ format:
     toc: true
 
 editor: visual
+
+
+
