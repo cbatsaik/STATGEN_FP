@@ -1,84 +1,22 @@
 ---
 title: "Statistical Genetics Final Project"
 subtitle: "Project by: Charles Batsaikhan '25, Mikaely Evans '25, and Julia Ross '26"
+about:
+  template: marquee
+  image: images/homepage_pic.png
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/cbatsaik/STATGEN_FP
 ---
 
-Final Project website for Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College.
+:::{#hero-heading}
 
-## **Table of Contents**
+Hello,
 
-1.  **Home**
-
-    -   What is Collider Bias?
-
-    -   How is this Related to Statistical Genetics?
-
-2.  **Implementation**
-
-    -   Simulating Our Data
-    
-    -   Instrument Variables
-
-    -   Mendelian Randomization
-
-    -   Results
-
-3.  **Limitations**
-
-    -   Weak Instrument Bias
-
-4.  **Other Methods**
-
-    -   Instrument Effect Regression Method
-
-    -   Corrected Weighted Least Squares Method
-
-    -   Slope-Hunter Method
-
-5.  **Sources**
-
-    -   Scientific Literature
-
-    -   R Packages
-
-    -   Other
-
-## **What is a Collider?**
-
-**A collider is a variable caused by both X and Y**, and including it in a model **leads to bias** because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. 
-
-Colliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can **cause** bias.
-
-![](images/Collider Basic DAG.png){width="850"}
-
-## How does a Collider Cause Bias?
-
-How exactly does the inclusion of a collider cause bias? Physician and statistician **Joseph Berkson** helped explain this with a paradoxical example, which is why Collider bias is also known as **Berkson’s bias**. 
-
-He demonstrated how **two diseases that are unrelated in the general population**, like gallbladder inflammation and diabetes, **can become spuriously associated when a sample is restricted to individuals in a hospital,** because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.
-
-If we looked at the general population, we would not see this association, so **adjusting for the collider variable “hospital” is introducing the bias.**
-
-![](images/Hospital DAG.png){width="850"}
-
-## How do we Deal With it?
-
-Usually, scientists have **removed** colliders from their models to escape this bias. However, we suggest that scientists implement **collider correction methods** to retain the important predictive information from the collider variable while still producing an unbiased model.
-
-For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using **2-Stage Mendelian Randomization**. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.
-
-## Collider Bias in Genetic Studies
-
-For example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. 
-
-Many genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore **correction methods** for how to adjust for a collider that has been included in a Genome Wide Association Study.
+This website is our digital artifact component for our final project in Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College. I hope you learn something!!
 
 
 
-
-
-
-
-
-
+:::
 

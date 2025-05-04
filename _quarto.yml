@@ -1,12 +1,15 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Collider Bias in Statistical Genetics"
-  navbar:
+  navbar: 
     left:
       - href: index.qmd
         text: Home
+      - href: introduction.qmd
+        text: Introduction
       - href: implementation.qmd
         text: Implementation
       - href: limitations.qmd
@@ -15,11 +18,22 @@ website:
         text: Other Methods
       - href: sources.qmd
         text: Sources
+    sidebar:
+    tools:
+      - icon: github
+        href: https://github.com/cbatsaik/STATGEN_FP
         
 format:
   html:
-    theme: cosmo
+    theme: [flatly]
     css: styles.css
     toc: true
 
 editor: visual
+
+
+# format:
+#   html:
+#     theme: [flatly] # Other good ones: minty, superhero, united, solar
+#     css: styles.css
+

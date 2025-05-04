@@ -1,35 +1,131 @@
 ---
 title: "Implementation"
 subtitle: "Collider Correction in Statistical Genetics"
+format:
+  html:
+    code-fold: true
+    code-summary: "Click to view code"
 ---
 
-## **Simulating Our Data**
+## Simulating Our Data
 
 For our study, we used **simulated data to learn about collider bias in genome wide association studies**. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.
 
--   Our **exposure** (X)variable is our **SNPs.** We got this genotype data from assignment Lab 2 from our course.
 
--   Our **outcome** (Y) variable is **sex**. This is binary and we created this variable so that it is not at all caused by SNPs
+-   Our **exposure** (X) variable is our **SNPs.** We got this genotype data from Lab 2 of our course, the hashmap dataset. After cleaning the dataset, we worked with 162 SNPs data.
 
--   Our **collider** variable is **height.** We created this variable to be caused by both SNPs and sex.
+
+-   Our **outcome** (Y) variable is **sex**. This is binary and we created this variable so that it is not at all caused by SNPs.
+
+
+
+-   Our **collider** variable is **height.** We created this variable to be caused by both SNPs and sex. Below is the example 10 rows of our simulated dataset.
+
+```{r, echo=FALSE}
+
+library(snpStats)
+library(tidyverse)
+
+#| label: read-data
+bed <- '../STATGEN_FP/SNP_data/1_QC_GWAS_FP/HapMap_3_r3_1.bed'
+bim <- '../STATGEN_FP/SNP_data/1_QC_GWAS_FP/HapMap_3_r3_1.bim'
+fam <- '../STATGEN_FP/SNP_data/1_QC_GWAS_FP/HapMap_3_r3_1.fam'
+hapmap <- read.plink(bed, bim, fam)
+class(hapmap)
+names(hapmap)
+#| label: calculate-maf
+maf <- col.summary(hapmap$genotypes)$MAF
+hapmap$map <- hapmap$map %>% mutate(MAF = maf)
+X <- as(hapmap$genotypes, "numeric")
+X.clean <- X[, maf > 0]
+
+#| label: remove-monomorphic
+map.clean <- hapmap$map %>% filter(MAF > 0)
+monomorphic <- which(maf == 0)
+originalSNPs <- hapmap$map %>% count()
+finalSNPs <- map.clean %>% count()
+
+#| label: simulate-data
+set.seed(494)
+N <- nrow(X.clean)
+# Simulate sex (uninfluenced by SNP)
+sex_sim <- rbinom(N, 1, 0.5)
+# Pick 5 random SNPs with MAF > 0.1 to be instruments
+set.seed(123)
+inst_idx <- sample(which(maf > 0.1), 5)
+instr_mat <- X.clean[, inst_idx]
+colnames(instr_mat) <- paste0("SNP", 1:5)
+# Simulate collider: Height depends on all 5 instruments + sex
+# choose arbitrary per-SNP effects:
+beta_ins <- c(2.0, 1.5, 2.2, 1.8, 1.2)
+height_sim <- 64 +5 * sex_sim +as.numeric(instr_mat %*% beta_ins) +rnorm(N, 0, 3)
+# Simulate independent outcome trait (same as before)
+trait_y <- 2 * X.clean[, 'rs2476601'] + rnorm(N, 0, 1)
+# Combine into data frame with 5 SNP columns
+sim_data_clean <- as_tibble(instr_mat) %>%
+  bind_cols(
+    tibble(
+      Sex    = sex_sim,
+      Height = height_sim,
+      Trait  = trait_y
+    )
+  )%>%
+  drop_na()
+
+head(sim_data_clean, 10)
+
+```
+
+::: {.callout-note title="SNP1-5"}
+You may be wondering how come there is SNP1-5 in the dataset, but these 5 SNPs are actually called Instrumental Variables and these are explained in the Instrumental Variable section.
+:::
+
 
 Looking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. **The more that the points lie on a straight diagonal line, the more normally distributed the data.**
 
-![](images/basic qq.jpg){width="750"}
-
 This QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely **along** the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias.
 
-## **Mendelian Randomization**
+```{r, echo=FALSE}
+library(qqman)
 
-In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.
+iterations      <- 1000
+pvals_plain    <- numeric(iterations)
+pvals_collider <- numeric(iterations)
+set.seed(2025)
+for(i in seq_len(iterations)) {
 
-Mendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height.
+  sim_data_clean$Sex    <- rbinom(nrow(sim_data_clean), 1, 0.5)
+  sim_data_clean$Height <- 64 +
+    5 * sim_data_clean$Sex +
+    2 * sim_data_clean$SNP1 +
+    rnorm(nrow(sim_data_clean), 0, 3)
+  # 1) Sex ~ SNP1
+  m1 <- glm(Sex ~ SNP1,
+            data = sim_data_clean,
+            family = binomial)
+  pvals_plain[i] <- coef(summary(m1))["SNP1", "Pr(>|z|)"]
+  # 2) Sex ~ SNP1 + Height
+  m2 <- glm(Sex ~ SNP1 + Height,
+            data = sim_data_clean,
+            family = binomial)
+  pvals_collider[i] <- coef(summary(m2))["SNP1", "Pr(>|z|)"]
+}
+# QQ plots
+qq(pvals_plain,    main = "QQ: Sex ~ SNP1")
 
-## **Instrument Variables**
+```
+
+Now, this QQ plot shows the relationship between SNPs and sex with adjusting for height. As you can see, the points deviates along the red line, which means the observed p-values does not match what we’d expect under the null. Clearly, adjusting for height creates a collider bias.
+
+```{r, echo=FALSE}
+qq(pvals_collider, main = "QQ: Sex ~ SNP1 + Height")
+```
+
+## Instrument Variables
 
 An instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:
 
-1.  Predict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.
+1.  Predict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data.
 
 2.  Affect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.
 
@@ -37,9 +133,17 @@ An instrument variable is a special kind of predictor we use when plain regressi
 
 In our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise.
 
-## **The 2-Stage Method:**
 
-![](images/Mr%20Implementation.jpg)
+
+## Mendelian Randomization
+
+In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.
+
+Mendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height.
+
+
+
+## The 2-Stage Method
 
 In this first regression, we model Height as a function of the SNPs. The output is a new variable, genetically predicted height or \hat{height}. This captures only the part of height that is driven by someone genes.
 
@@ -47,27 +151,81 @@ We then use hat height as the predictor in a second regression, where Sex is the
 
 The coefficient from this regression tells us: If someone’s height changed purely due to genetic reasons, would that change their odds of being Sex=1?
 
-## **Why this method?**
+```{r}
+# First Stage: Regress Height on SNP1-SNP5
+first_stage <- lm(
+  Height ~ SNP1 + SNP2 + SNP3 + SNP4 + SNP5,
+  data = sim_data_clean
+)
+
+# Create genetically predicted height 
+sim_data_clean$Height_hat <- predict(first_stage)
+
+# Second Stage: Regress Sex on predicted Height
+second_stage <- glm(
+  Sex ~ Height_hat,
+  data = sim_data_clean,
+  family = binomial
+)
+
+summary(second_stage)
+```
+
+- Estimate (0.1124): For every one-unit increase in genetically predicted height, the log-odds of being Sex = 1 increases by 0.1124.
+
+- p-value (0.391): This is not statistically significant, suggesting that there's no evidence of a causal effect of height (instrumented by SNPs) on sex.
+
+
+
+## Why this method?
 
 Methods like Wald Ratio, Inverse Variance Weighting, MR-Egger, and TwoSampleMR are designed for settings where you only have summary GWAS results for the exposure and outcome from different cohorts. In contrast, 2SLS works directly with individual-level genotype and phenotype data like our simulated data.
 
 Methods like MR-Egger are built to detect and correct for pleiotropy, which is when SNPs affect the outcome through other pathways besides the exposure, but in our simulation, we intentionally designed the SNPs to influence only height, not sex directly, so there’s no pleiotropy to correct.
 
 ## Our Results
+```{r, echo=FALSE}
+library(qqman)
+
+iterations <- 1000
+pvals_plain <- numeric(iterations)
+pvals_mr    <- numeric(iterations)
+
+set.seed(2025)
+for(i in seq_len(iterations)) {
+  # Resimulate collider structure
+  sim_data_clean$Sex <- rbinom(nrow(sim_data_clean), 1, 0.5)
+  sim_data_clean$Height <- 64 +
+    5 * sim_data_clean$Sex +
+    2 * sim_data_clean$SNP1 +
+    rnorm(nrow(sim_data_clean), 0, 3)
+
+  # MR 2SLS
+  fs <- lm(Height ~ SNP1 + SNP2 + SNP3 + SNP4 + SNP5, data = sim_data_clean)
+  sim_data_clean$Height_hat <- predict(fs)
+  m_mr <- glm(Sex ~ Height_hat, data = sim_data_clean, family = binomial)
+  pvals_mr[i] <- coef(summary(m_mr))["Height_hat", "Pr(>|z|)"]
+}
+```
+
 
 This is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.
 
-![](images/qq plot height bad.jpg){width="750"}
+```{r, echo=FALSE}
+qq(pvals_collider, main = "QQ: Sex ~ SNP1 + Height")
+```
 
 As you can see, the result is **very far** from the red line, meaning we’re seeing **inflated test statistics**. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.
 
-![](images/qq plot correction good.jpg){width="750"}
+This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex.
 
-This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex. 
+```{r, echo=FALSE}
+qq(pvals_mr, main = "MR 2SLS: Sex ~ Predicted Height")
+```
 
 As you can see, the points aren’t perfect but they fall **much closer to** the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the **inflated test statistics** we were seeing before!
 
-**Results of our Study:** Mendelian randomization **helped eliminate much of the bias** introduced by our collider variable height when modeling binary sex as an outcome of SNPs. 
+**Results of our Study:** Mendelian randomization **helped eliminate much of the bias** introduced by our collider variable height when modeling binary sex as an outcome of SNPs.
 
 
 
