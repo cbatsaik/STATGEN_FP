@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -158,11 +124,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#simulating-our-data" id="toc-simulating-our-data" class="nav-link active" data-scroll-target="#simulating-our-data">Simulating Our Data</a></li>
-  <li><a href="#instrument-variables" id="toc-instrument-variables" class="nav-link" data-scroll-target="#instrument-variables">Instrument Variables</a></li>
-  <li><a href="#mendelian-randomization" id="toc-mendelian-randomization" class="nav-link" data-scroll-target="#mendelian-randomization">Mendelian Randomization</a></li>
-  <li><a href="#the-2-stage-method" id="toc-the-2-stage-method" class="nav-link" data-scroll-target="#the-2-stage-method">The 2-Stage Method</a></li>
-  <li><a href="#why-this-method" id="toc-why-this-method" class="nav-link" data-scroll-target="#why-this-method">Why this method?</a></li>
+  <li><a href="#simulating-our-data" id="toc-simulating-our-data" class="nav-link active" data-scroll-target="#simulating-our-data"><strong>Simulating Our Data</strong></a></li>
+  <li><a href="#mendelian-randomization" id="toc-mendelian-randomization" class="nav-link" data-scroll-target="#mendelian-randomization"><strong>Mendelian Randomization</strong></a></li>
+  <li><a href="#instrument-variables" id="toc-instrument-variables" class="nav-link" data-scroll-target="#instrument-variables"><strong>Instrument Variables</strong></a></li>
+  <li><a href="#the-2-stage-method" id="toc-the-2-stage-method" class="nav-link" data-scroll-target="#the-2-stage-method"><strong>The 2-Stage Method:</strong></a></li>
+  <li><a href="#why-this-method" id="toc-why-this-method" class="nav-link" data-scroll-target="#why-this-method"><strong>Why this method?</strong></a></li>
   <li><a href="#our-results" id="toc-our-results" class="nav-link" data-scroll-target="#our-results">Our Results</a></li>
   </ul>
 </nav>
@@ -191,205 +157,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="simulating-our-data" class="level2">
-<h2 class="anchored" data-anchor-id="simulating-our-data">Simulating Our Data</h2>
+<h2 class="anchored" data-anchor-id="simulating-our-data"><strong>Simulating Our Data</strong></h2>
 <p>For our study, we used <strong>simulated data to learn about collider bias in genome wide association studies</strong>. Genome wide association studies, or GWAS for short, are statistical models that try to identify certain locations on someone’s genome called SNPs that are associated with a trait of interest.</p>
 <ul>
-<li><p>Our <strong>exposure</strong> (X) variable is our <strong>SNPs.</strong> We got this genotype data from Lab 2 of our course, the hashmap dataset. After cleaning the dataset, we worked with 162 SNPs data.</p></li>
-<li><p>Our <strong>outcome</strong> (Y) variable is <strong>sex</strong>. This is binary and we created this variable so that it is not at all caused by SNPs.</p></li>
-<li><p>Our <strong>collider</strong> variable is <strong>height.</strong> We created this variable to be caused by both SNPs and sex. Below is the example 10 rows of our simulated dataset.</p></li>
+<li><p>Our <strong>exposure</strong> (X)variable is our <strong>SNPs.</strong> We got this genotype data from assignment Lab 2 from our course.</p></li>
+<li><p>Our <strong>outcome</strong> (Y) variable is <strong>sex</strong>. This is binary and we created this variable so that it is not at all caused by SNPs</p></li>
+<li><p>Our <strong>collider</strong> variable is <strong>height.</strong> We created this variable to be caused by both SNPs and sex.</p></li>
 </ul>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: survival</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::expand() masks Matrix::expand()
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ tidyr::pack()   masks Matrix::pack()
-✖ tidyr::unpack() masks Matrix::unpack()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "list"</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "genotypes" "fam"       "map"      </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 8
-    SNP1  SNP2  SNP3  SNP4  SNP5   Sex Height Trait
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1     2     1     2     1     2     0   79.5 2.07 
- 2     2     1     2     1     1     0   73.1 3.97 
- 3     1     2     2     2     2     0   77.3 6.13 
- 4     1     0     1     1     2     0   71.1 1.26 
- 5     2     1     2     1     0     0   79.4 0.904
- 6     2     1     2     0     2     0   77.4 4.04 
- 7     2     2     2     2     2     0   82.6 4.31 
- 8     1     1     2     0     1     0   73.4 4.44 
- 9     2     0     2     0     2     1   78.1 3.54 
-10     1     0     2     2     1     1   85.6 2.94 </code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="SNP1-5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-SNP1-5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You may be wondering how come there is SNP1-5 in the dataset, but these 5 SNPs are actually called Instrumental Variables and these are explained in the Instrumental Variable section.</p>
-</div>
-</div>
 <p>Looking at our simulated data in a visualization, we can analyze the impacts of GWAS using what is called a QQ Plot. These are a type of plot used to determine if data follows a normal distribution. <strong>The more that the points lie on a straight diagonal line, the more normally distributed the data.</strong></p>
+<p><img src="images/basic qq.jpg" class="img-fluid" width="750"></p>
 <p>This QQ plot shows the relationship between SNPs and sex without adjusting for height. As you can see, the points fall nicely <strong>along</strong> the red line, which means the observed p-values match what we’d expect under the null. Clearly, having no collider variable means we have little to no bias.</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>For example usage please run: vignette('qqman')</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Citation appreciated but not required:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Turner, (2018). qqman: an R package for visualizing GWAS results using Q-Q and manhattan plots. Journal of Open Source Software, 3(25), 731, https://doi.org/10.21105/joss.00731.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="implementation_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now, this QQ plot shows the relationship between SNPs and sex with adjusting for height. As you can see, the points deviates along the red line, which means the observed p-values does not match what we’d expect under the null. Clearly, adjusting for height creates a collider bias.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="implementation_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+</section>
+<section id="mendelian-randomization" class="level2">
+<h2 class="anchored" data-anchor-id="mendelian-randomization"><strong>Mendelian Randomization</strong></h2>
+<p>In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.</p>
+<p>Mendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height.</p>
 </section>
 <section id="instrument-variables" class="level2">
-<h2 class="anchored" data-anchor-id="instrument-variables">Instrument Variables</h2>
+<h2 class="anchored" data-anchor-id="instrument-variables"><strong>Instrument Variables</strong></h2>
 <p>An instrument variable is a special kind of predictor we use when plain regression can mislead us about cause and effect. To work properly, an IV must do three things:</p>
 <ol type="1">
-<li><p>Predict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data.</p></li>
+<li><p>Predict the exposure: our IVs (the five SNPs) each have a real, measurable effect on height in our data, which we confirmed by seeing significant coefficients and a strong F-statistic in our first‐stage regression.</p></li>
 <li><p>Affect the outcome only through that exposure: in our simulation, each SNP influences the probability of “Sex = 1” only because it shifts height; there is no other built-in pathway from these genetic variants to the sex outcome.</p></li>
 <li><p>Be independent of confounders: we generated sex and all other noise completely at random, so our SNPs can’t be tangled up with any hidden factors that might otherwise bias the height-sex relationship.</p></li>
 </ol>
 <p>In our project, we discovered that simply regressing sex on measured height creates a false association. MR fixes this by isolating the genetic component of height and that strips away all the collider-induced noise.</p>
 </section>
-<section id="mendelian-randomization" class="level2">
-<h2 class="anchored" data-anchor-id="mendelian-randomization">Mendelian Randomization</h2>
-<p>In our study, we explored how to correct for collider bias using a method called Mendelian Randomization and a type of variable called Instrument Variables.</p>
-<p>Mendelian Randomization (MR) is a way of using natural genetic differences to mimic a randomized trial and uncover true cause-and-effect relationships in observational data. In MR, we pick genetic variants that we know influence an “exposure”. Because those SNPs are randomly inherited and aren’t tied to lifestyle or environment, any effect they have on our outcome must flow only through height.</p>
-</section>
 <section id="the-2-stage-method" class="level2">
-<h2 class="anchored" data-anchor-id="the-2-stage-method">The 2-Stage Method</h2>
+<h2 class="anchored" data-anchor-id="the-2-stage-method"><strong>The 2-Stage Method:</strong></h2>
+<p><img src="images/Mr Implementation.jpg" class="img-fluid"></p>
 <p>In this first regression, we model Height as a function of the SNPs. The output is a new variable, genetically predicted height or . This captures only the part of height that is driven by someone genes.</p>
 <p>We then use hat height as the predictor in a second regression, where Sex is the outcome. Because hat height is driven only by random genetic variation, it is free of confounding or collider bias.</p>
 <p>The coefficient from this regression tells us: If someone’s height changed purely due to genetic reasons, would that change their odds of being Sex=1?</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Click to view code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First Stage: Regress Height on SNP1-SNP5</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>first_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  Height <span class="sc">~</span> SNP1 <span class="sc">+</span> SNP2 <span class="sc">+</span> SNP3 <span class="sc">+</span> SNP4 <span class="sc">+</span> SNP5,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> sim_data_clean</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create genetically predicted height </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>sim_data_clean<span class="sc">$</span>Height_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(first_stage)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Second Stage: Regress Sex on predicted Height</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>second_stage <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  Sex <span class="sc">~</span> Height_hat,</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> sim_data_clean,</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(second_stage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = Sex ~ Height_hat, family = binomial, data = sim_data_clean)
-
-Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept)  -7.7165     9.1083  -0.847    0.397
-Height_hat    0.1124     0.1310   0.858    0.391
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 224.18  on 161  degrees of freedom
-Residual deviance: 223.44  on 160  degrees of freedom
-AIC: 227.44
-
-Number of Fisher Scoring iterations: 3</code></pre>
-</div>
-</div>
-<ul>
-<li><p>Estimate (0.1124): For every one-unit increase in genetically predicted height, the log-odds of being Sex = 1 increases by 0.1124.</p></li>
-<li><p>p-value (0.391): This is not statistically significant, suggesting that there’s no evidence of a causal effect of height (instrumented by SNPs) on sex.</p></li>
-</ul>
 </section>
 <section id="why-this-method" class="level2">
-<h2 class="anchored" data-anchor-id="why-this-method">Why this method?</h2>
+<h2 class="anchored" data-anchor-id="why-this-method"><strong>Why this method?</strong></h2>
 <p>Methods like Wald Ratio, Inverse Variance Weighting, MR-Egger, and TwoSampleMR are designed for settings where you only have summary GWAS results for the exposure and outcome from different cohorts. In contrast, 2SLS works directly with individual-level genotype and phenotype data like our simulated data.</p>
 <p>Methods like MR-Egger are built to detect and correct for pleiotropy, which is when SNPs affect the outcome through other pathways besides the exposure, but in our simulation, we intentionally designed the SNPs to influence only height, not sex directly, so there’s no pleiotropy to correct.</p>
 </section>
 <section id="our-results" class="level2">
 <h2 class="anchored" data-anchor-id="our-results">Our Results</h2>
 <p>This is what the QQ plot looked like from when we ran a GWAS regressing sex on SNPs, including the collider variable height.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="implementation_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><img src="images/qq plot height bad.jpg" class="img-fluid" width="750"></p>
 <p>As you can see, the result is <strong>very far</strong> from the red line, meaning we’re seeing <strong>inflated test statistics</strong>. This is exactly the kind of bias introduced when you condition on a collider. It opens up a causal path between SNPs and sex, even though there’s no true genetic link there.</p>
-<p>This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="implementation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><img src="images/qq plot correction good.jpg" class="img-fluid" width="750"></p>
+<p>This QQ plot shows that when happened when we used MR to correct for height in the relationship between SNPs and sex.&nbsp;</p>
 <p>As you can see, the points aren’t perfect but they fall <strong>much closer to</strong> the red line than they did without correction. This means the observed p-values are much closer to what we’d expect under the null, and using MR helped us minimize the <strong>inflated test statistics</strong> we were seeing before!</p>
-<p><strong>Results of our Study:</strong> Mendelian randomization <strong>helped eliminate much of the bias</strong> introduced by our collider variable height when modeling binary sex as an outcome of SNPs.</p>
+<p><strong>Results of our Study:</strong> Mendelian randomization <strong>helped eliminate much of the bias</strong> introduced by our collider variable height when modeling binary sex as an outcome of SNPs.&nbsp;</p>
 
 
 </section>

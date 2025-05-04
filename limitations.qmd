@@ -3,22 +3,10 @@ title: "Limitations"
 subtitle: "Weak Instrument Bias"
 ---
 
-## **Weak Instrument Bias**
-
 Weak Instrument Bias occurs when Instrumental Variables (IVs) are only **weakly** associated with the collider variable. This bias causes Type 1 Error since the IVs don't explain sufficient amounts of variation in the collider variable.
 
-Methods that use IV's are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV's, but it corrects for their confounding so it does not experience this bias as strongly as some other methods. When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.
+Methods that use IV's are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV's, but it corrects for their confounding so it does not experience this bias as strongly as some other methods. 
 
-Weak Instrument Bias is demonstrated in QQ Plots from our Mendelian Randomization Correction example. This first QQ plot shows the relationship between Sex and SNP **without** including the collider Height.
+When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.
 
-![](images/basic qq.jpg)
 
-As you can see, the points fall along the red line which indicates a nearly perfect Normal Distribution.
-
-This second QQ plot shows the relationship between Sex and Height_hat, which is the collider-corrected predictor variable that includes information from both SNP and Height.
-
-![](images/qq plot correction good.jpg)
-
-In this QQ plot, the points fall very close to the red line, following a similar slope, yet slightly shifted above the line. This shows that the collider-corrected model does not follow a perfectly Normal Distribution because the Instrumental Variables from the Mendelian Randomization do not perfectly explain the variation in the relationship.
-
-This is Weak Instrument Bias, and all collider-corrected models will experience it to some degree. We **still** encourage statisticians to **correct for collider bias** in their models, despite Weak Instrument Bias, because it offers a **more complete** understanding of the relationship being modeled. Being transparent and honest about the limitations and structure of your data and models is essential to producing trustworthy and meaningful statistics.

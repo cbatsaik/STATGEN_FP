@@ -3,7 +3,9 @@ title: "Other Existing Methods"
 subtitle: "Collider Correction Methods to Explore Further"
 ---
 
-## **Slope-Hunter**
+## Instrument Effect Regression
+
+## Slope-Hunter
 
 The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV's are used to produce a new slope that has adjusted for the effect of the Collider Variables.
 
@@ -13,7 +15,7 @@ The Slope-Hunter method assumes that its model based clustering algorithm has **
 
 An R package called [SlopeHunter by Osmahmoud](https://github.com/Osmahmoud/SlopeHunter?tab=readme-ov-file) exists to use the Slope-Hunter method for collider bias correction.
 
-## **Corrected Weighted Least Squares**
+## Corrected Weighted Least Squares
 
 The Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.
 
@@ -30,7 +32,10 @@ CWLS may not be the best correction method because produces results with residua
 
 There also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.
 
-To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal associatio
+To implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association. 
+
+
+
 
 
 
