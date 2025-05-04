@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sources – Collider Bias in Statistical Genetics</title>
+<title>Statistical Genetics Final Project – Collider Bias in Statistical Genetics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./introduction.html"> 
+    <a class="nav-link active" href="./introduction.html" aria-current="page"> 
 <span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Other Methods</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./sources.html" aria-current="page"> 
+    <a class="nav-link" href="./sources.html"> 
 <span class="menu-text">Sources</span></a>
   </li>  
 </ul>
@@ -129,9 +129,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#scientific-literature-review" id="toc-scientific-literature-review" class="nav-link active" data-scroll-target="#scientific-literature-review">Scientific Literature Review</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  <li><a href="#other-helpful-resources" id="toc-other-helpful-resources" class="nav-link" data-scroll-target="#other-helpful-resources">Other Helpful Resources</a></li>
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link active" data-scroll-target="#table-of-contents"><strong>Table of Contents</strong></a></li>
+  <li><a href="#what-is-a-collider" id="toc-what-is-a-collider" class="nav-link" data-scroll-target="#what-is-a-collider"><strong>What is a Collider?</strong></a></li>
+  <li><a href="#how-does-a-collider-cause-bias" id="toc-how-does-a-collider-cause-bias" class="nav-link" data-scroll-target="#how-does-a-collider-cause-bias">How does a Collider Cause Bias?</a></li>
+  <li><a href="#how-do-we-deal-with-it" id="toc-how-do-we-deal-with-it" class="nav-link" data-scroll-target="#how-do-we-deal-with-it">How do we Deal With it?</a></li>
+  <li><a href="#collider-bias-in-genetic-studies" id="toc-collider-bias-in-genetic-studies" class="nav-link" data-scroll-target="#collider-bias-in-genetic-studies">Collider Bias in Genetic Studies</a></li>
   </ul>
 </nav>
     </div>
@@ -140,7 +142,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sources</h1>
+<h1 class="title">Statistical Genetics Final Project</h1>
+<p class="subtitle lead">Project by: Charles Batsaikhan ’25, Mikaely Evans ’25, and Julia Ross ’26</p>
 </div>
 
 
@@ -157,22 +160,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="scientific-literature-review" class="level2">
-<h2 class="anchored" data-anchor-id="scientific-literature-review">Scientific Literature Review</h2>
-<p>Felix R. Day, Po-Ru Loh, Robert A. Scott, Ken K. Ong, John R.B. Perry “A Robust Example of Collider Bias in a Genetic Association Study” https://www.cell.com/ajhg/fulltext/S0002-9297(15)00514-5</p>
-<p>Grinde, Kelsey E., et al.&nbsp;“Adjusting for Principal Components Can Induce Collider Bias in Genome-Wide Association Studies.” PLoS Genetics, vol.&nbsp;20, no. 12, 2024, p.&nbsp;e1011242, https://doi.org/10.1371/journal.pgen.1011242.</p>
-<p>Mahmoud, O., Dudbridge, F., Davey Smith, G. et al.&nbsp;A robust method for collider bias correction in conditional genome-wide association studies. Nat Commun 13, 619 (2022). https://doi.org/10.1038/s41467-022-28119-9</p>
-<p>Mitchell, R. E., Hartley, A. E., Walker, V. M., Gkatzionis, A., Yarmolinsky, J., Bell, J. A., Chong, A. H. W., Paternoster, L., Tilling, K., &amp; Smith, G. D. (n.d.). Strategies to investigate and mitigate collider bias in genetic and mendelian randomisation studies of disease progression. PLOS Genetics. https://journals.plos.org/plosgenetics/article?id=10.1371%2Fjournal.pgen.1010596</p>
-<p>Sun, Yan V., et al.&nbsp;“Identification and Correction for Collider Bias in a Genome-Wide Association Study of Diabetes-Related Heart Failure.” The American Journal of Human Genetics, vol.&nbsp;111, no. 7, 2024, pp.&nbsp;1481–93, https://doi.org/10.1016/j.ajhg.2024.05.018.</p>
+<p>Final Project website for Statistical Genetics (STAT 494). This course was taught by Dr.&nbsp;Kelsey Grinde in Spring 2025, Macalester College.</p>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents"><strong>Table of Contents</strong></h2>
+<ol type="1">
+<li><p><strong>Home</strong></p>
+<ul>
+<li><p>What is Collider Bias?</p></li>
+<li><p>How is this Related to Statistical Genetics?</p></li>
+</ul></li>
+<li><p><strong>Implementation</strong></p>
+<ul>
+<li><p>Simulating Our Data</p></li>
+<li><p>Instrument Variables</p></li>
+<li><p>Mendelian Randomization</p></li>
+<li><p>Results</p></li>
+</ul></li>
+<li><p><strong>Limitations</strong></p>
+<ul>
+<li>Weak Instrument Bias</li>
+</ul></li>
+<li><p><strong>Other Methods</strong></p>
+<ul>
+<li><p>Instrument Effect Regression Method</p></li>
+<li><p>Corrected Weighted Least Squares Method</p></li>
+<li><p>Slope-Hunter Method</p></li>
+</ul></li>
+<li><p><strong>Sources</strong></p>
+<ul>
+<li><p>Scientific Literature</p></li>
+<li><p>R Packages</p></li>
+<li><p>Other</p></li>
+</ul></li>
+</ol>
 </section>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
-<p>Dudbridge F, Cai S (2025). <em>ColliderBias: Adjust collider bias and weak instrument bias in Mendelian Randomisation</em>. R package version 1.0.1, commit 66606d074c5cfd5263a0e2234ceb0a88fc9fdbc1, <a href="https://github.com/SiyangCai/ColliderBias" class="uri">https://github.com/SiyangCai/ColliderBias</a></p>
+<section id="what-is-a-collider" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-collider"><strong>What is a Collider?</strong></h2>
+<p><strong>A collider is a variable caused by both X and Y</strong>, and including it in a model <strong>leads to bias</strong> because it combines the causal effect of X on Y with the causal effect of X and Y on the collider.&nbsp;</p>
+<p>Colliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can <strong>cause</strong> bias.</p>
+<p><img src="images/Collider Basic DAG.png" class="img-fluid" width="850"></p>
 </section>
-<section id="other-helpful-resources" class="level2">
-<h2 class="anchored" data-anchor-id="other-helpful-resources">Other Helpful Resources</h2>
-<p>https://lmyint.github.io/causal_fall_2024/</p>
-<p>https://mac-stat.github.io/statgen/</p>
+<section id="how-does-a-collider-cause-bias" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-a-collider-cause-bias">How does a Collider Cause Bias?</h2>
+<p>How exactly does the inclusion of a collider cause bias? Physician and statistician <strong>Joseph Berkson</strong> helped explain this with a paradoxical example, which is why Collider bias is also known as <strong>Berkson’s bias</strong>.&nbsp;</p>
+<p>He demonstrated how <strong>two diseases that are unrelated in the general population</strong>, like gallbladder inflammation and diabetes, <strong>can become spuriously associated when a sample is restricted to individuals in a hospital,</strong> because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.</p>
+<p>If we looked at the general population, we would not see this association, so <strong>adjusting for the collider variable “hospital” is introducing the bias.</strong></p>
+<p><img src="images/Hospital DAG.png" class="img-fluid" width="850"></p>
+</section>
+<section id="how-do-we-deal-with-it" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-deal-with-it">How do we Deal With it?</h2>
+<p>Usually, scientists have <strong>removed</strong> colliders from their models to escape this bias. However, we suggest that scientists implement <strong>collider correction methods</strong> to retain the important predictive information from the collider variable while still producing an unbiased model.</p>
+<p>For this project, we walk through an example of how to correct for collider bias in a statistical genetics context using <strong>2-Stage Mendelian Randomization</strong>. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them.</p>
+</section>
+<section id="collider-bias-in-genetic-studies" class="level2">
+<h2 class="anchored" data-anchor-id="collider-bias-in-genetic-studies">Collider Bias in Genetic Studies</h2>
+<p>For example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it.&nbsp;</p>
+<p>Many genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies.&nbsp;Because of this, we wanted to explore <strong>correction methods</strong> for how to adjust for a collider that has been included in a Genome Wide Association Study.</p>
 
 
 </section>

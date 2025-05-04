@@ -93,6 +93,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./introduction.html"> 
+<span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./implementation.html"> 
 <span class="menu-text">Implementation</span></a>
   </li>  
@@ -120,8 +124,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#weak-instrument-bias" id="toc-weak-instrument-bias" class="nav-link active" data-scroll-target="#weak-instrument-bias"><strong>Weak Instrument Bias</strong></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -146,11 +156,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="weak-instrument-bias" class="level2">
+<h2 class="anchored" data-anchor-id="weak-instrument-bias"><strong>Weak Instrument Bias</strong></h2>
 <p>Weak Instrument Bias occurs when Instrumental Variables (IVs) are only <strong>weakly</strong> associated with the collider variable. This bias causes Type 1 Error since the IVs don’t explain sufficient amounts of variation in the collider variable.</p>
-<p>Methods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods.</p>
-<p>When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.</p>
+<p>Methods that use IV’s are prone to this bias, especially Mendelian Randomization, Instrument Effect Regression, and Slope-Hunter Method. The Corrected Weighted Least Squares Method of collider correction uses IV’s, but it corrects for their confounding so it does not experience this bias as strongly as some other methods. When choosing a model, it is important to consider the advantages and disadvantages that each model brings to maximize efficiency and truth in your results.</p>
+<p>Weak Instrument Bias is demonstrated in QQ Plots from our Mendelian Randomization Correction example. This first QQ plot shows the relationship between Sex and SNP <strong>without</strong> including the collider Height.</p>
+<p><img src="images/basic qq.jpg" class="img-fluid"></p>
+<p>As you can see, the points fall along the red line which indicates a nearly perfect Normal Distribution.</p>
+<p>This second QQ plot shows the relationship between Sex and Height_hat, which is the collider-corrected predictor variable that includes information from both SNP and Height.</p>
+<p><img src="images/qq plot correction good.jpg" class="img-fluid"></p>
+<p>In this QQ plot, the points fall very close to the red line, following a similar slope, yet slightly shifted above the line. This shows that the collider-corrected model does not follow a perfectly Normal Distribution because the Instrumental Variables from the Mendelian Randomization do not perfectly explain the variation in the relationship.</p>
+<p>This is Weak Instrument Bias, and all collider-corrected models will experience it to some degree. We <strong>still</strong> encourage statisticians to <strong>correct for collider bias</strong> in their models, despite Weak Instrument Bias, because it offers a <strong>more complete</strong> understanding of the relationship being modeled. Being transparent and honest about the limitations and structure of your data and models is essential to producing trustworthy and meaningful statistics.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
