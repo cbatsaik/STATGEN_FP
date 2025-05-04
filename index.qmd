@@ -20,8 +20,3 @@ This website is our digital artifact component for our final project in Statisti
 
 :::
 
-
-::: {.card bg-primary text-white}
-## This is a Highlighted Card
-This card uses Bootstrap’s blue background and white text.
-:::

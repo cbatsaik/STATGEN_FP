@@ -1,9 +1,7 @@
 ---
-title: "Statistical Genetics Final Project"
-subtitle: "Project by: Charles Batsaikhan '25, Mikaely Evans '25, and Julia Ross '26"
+title: "Introduction"
 ---
 
-Final Project website for Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College.
 
 ## **Table of Contents**
 

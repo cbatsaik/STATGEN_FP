@@ -51,42 +51,42 @@
   {
     "objectID": "introduction.html",
     "href": "introduction.html",
-    "title": "Statistical Genetics Final Project",
+    "title": "Introduction",
     "section": "",
-    "text": "Final Project website for Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College."
+    "text": "Home\n\nWhat is Collider Bias?\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nInstrument Variables\nMendelian Randomization\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources\n\nScientific Literature\nR Packages\nOther"
   },
   {
     "objectID": "introduction.html#table-of-contents",
     "href": "introduction.html#table-of-contents",
-    "title": "Statistical Genetics Final Project",
-    "section": "Table of Contents",
-    "text": "Table of Contents\n\nHome\n\nWhat is Collider Bias?\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nInstrument Variables\nMendelian Randomization\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources\n\nScientific Literature\nR Packages\nOther"
+    "title": "Introduction",
+    "section": "",
+    "text": "Home\n\nWhat is Collider Bias?\nHow is this Related to Statistical Genetics?\n\nImplementation\n\nSimulating Our Data\nInstrument Variables\nMendelian Randomization\nResults\n\nLimitations\n\nWeak Instrument Bias\n\nOther Methods\n\nInstrument Effect Regression Method\nCorrected Weighted Least Squares Method\nSlope-Hunter Method\n\nSources\n\nScientific Literature\nR Packages\nOther"
   },
   {
     "objectID": "introduction.html#what-is-a-collider",
     "href": "introduction.html#what-is-a-collider",
-    "title": "Statistical Genetics Final Project",
+    "title": "Introduction",
     "section": "What is a Collider?",
     "text": "What is a Collider?\nA collider is a variable caused by both X and Y, and including it in a model leads to bias because it combines the causal effect of X on Y with the causal effect of X and Y on the collider. \nColliders are less common than confounding variables and mediator variables, which you may be familiar with. The main difference is that accounting for confounders and mediators helps address bias, but accounting for a collider can cause bias."
   },
   {
     "objectID": "introduction.html#how-does-a-collider-cause-bias",
     "href": "introduction.html#how-does-a-collider-cause-bias",
-    "title": "Statistical Genetics Final Project",
+    "title": "Introduction",
     "section": "How does a Collider Cause Bias?",
     "text": "How does a Collider Cause Bias?\nHow exactly does the inclusion of a collider cause bias? Physician and statistician Joseph Berkson helped explain this with a paradoxical example, which is why Collider bias is also known as Berkson’s bias. \nHe demonstrated how two diseases that are unrelated in the general population, like gallbladder inflammation and diabetes, can become spuriously associated when a sample is restricted to individuals in a hospital, because a patient who does not have gallbladder inflammation was much more likely to have another disease like diabetes than someone from the general population.\nIf we looked at the general population, we would not see this association, so adjusting for the collider variable “hospital” is introducing the bias."
   },
   {
     "objectID": "introduction.html#how-do-we-deal-with-it",
     "href": "introduction.html#how-do-we-deal-with-it",
-    "title": "Statistical Genetics Final Project",
+    "title": "Introduction",
     "section": "How do we Deal With it?",
     "text": "How do we Deal With it?\nUsually, scientists have removed colliders from their models to escape this bias. However, we suggest that scientists implement collider correction methods to retain the important predictive information from the collider variable while still producing an unbiased model.\nFor this project, we walk through an example of how to correct for collider bias in a statistical genetics context using 2-Stage Mendelian Randomization. We also include information on other relevant correction methods for collider bias and the helpful tools if you choose to implement them."
   },
   {
     "objectID": "introduction.html#collider-bias-in-genetic-studies",
     "href": "introduction.html#collider-bias-in-genetic-studies",
-    "title": "Statistical Genetics Final Project",
+    "title": "Introduction",
     "section": "Collider Bias in Genetic Studies",
     "text": "Collider Bias in Genetic Studies\nFor example, say the Collider in the above plot is depression or anxiety. Someone can be genetically more likely to have that trait, hence the arrow from X (genetics) to the Collider. But depression and anxiety can also be caused by non-genetic factors, like stressful living conditions or exposure to trauma, which would be Y. But Genes do not cause stressful living conditions or exposure to trauma, which makes depression or anxiety a collider, since the other 2 variables have arrows that collide on it. \nMany genetic variants and phenotypes both influence other traits- like height, BMI, or disease diagnosis, but those same traits may have another cause unrelated to genes. This is what makes the possibility of having collider bias so prevalent in genetic studies. Because of this, we wanted to explore correction methods for how to adjust for a collider that has been included in a Genome Wide Association Study."
   },
@@ -95,21 +95,28 @@
     "href": "index.html",
     "title": "Statistical Genetics Final Project",
     "section": "",
-    "text": "Hello,\nThis website is our digital artifact component for our final project in Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College. I hope you learn something!!\n\n::: {.card bg-primary text-white} ## This is a Highlighted Card This card uses Bootstrap’s blue background and white text. :::"
+    "text": "Hello,\nThis website is our digital artifact component for our final project in Statistical Genetics (STAT 494). This course was taught by Dr. Kelsey Grinde in Spring 2025, Macalester College. I hope you learn something!!"
+  },
+  {
+    "objectID": "other_methods.html",
+    "href": "other_methods.html",
+    "title": "Other Existing Methods",
+    "section": "",
+    "text": "The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV’s are used to produce a new slope that has adjusted for the effect of the Collider Variables.\n\nThe Slope-Hunter method assumes that its model based clustering algorithm has correctly identified the instrumental variables. If these IV’s were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists.\nAn R package called SlopeHunter by Osmahmoud exists to use the Slope-Hunter method for collider bias correction."
   },
   {
     "objectID": "other_methods.html#slope-hunter",
     "href": "other_methods.html#slope-hunter",
     "title": "Other Existing Methods",
-    "section": "Slope-Hunter",
-    "text": "Slope-Hunter\nThe Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV’s are used to produce a new slope that has adjusted for the effect of the Collider Variables.\n\nThe Slope-Hunter method assumes that its model based clustering algorithm has correctly identified the instrumental variables. If these IV’s were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists.\nAn R package called SlopeHunter by Osmahmoud exists to use the Slope-Hunter method for collider bias correction."
+    "section": "",
+    "text": "The Slope-Hunter Method of Collider Correction uses model based clustering to identify Instrumental Variables. In order to do this, Slope-Hunter uses GWAS results to plot the estimates of exposure association with collider on the x-axis and the outcome conditional on collider on the y-axis. Then, the clustering algorithm identifies exposures that affect the collider variable and selects these as helpful Instrumental Variables. These new IV’s are used to produce a new slope that has adjusted for the effect of the Collider Variables.\n\nThe Slope-Hunter method assumes that its model based clustering algorithm has correctly identified the instrumental variables. If these IV’s were identified incorrectly, and the new correction is based on exposures that have no affect on the collider, then the bias still exists.\nAn R package called SlopeHunter by Osmahmoud exists to use the Slope-Hunter method for collider bias correction."
   },
   {
     "objectID": "other_methods.html#corrected-weighted-least-squares",
     "href": "other_methods.html#corrected-weighted-least-squares",
     "title": "Other Existing Methods",
     "section": "Corrected Weighted Least Squares",
-    "text": "Corrected Weighted Least Squares\nThe Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.\nInstructions for correction:\n\nInstall ColliderBias package by Siyang Cai and load library.\nUse methodCB() function to assign the arguments to your GWAS output data.\nSpecified the method in methodCB() to “CWLS” for the type of correction we are using.\nInterpret the output values! The most important for CWLS are b and b_cor:\n\nb: The coefficient of the regression (slope) of ybeta[prune] on xbeta[prune], after correction for regression dilution.\nb_cor: The adjusted slope that compares the biased slope to the corrected slope.\n\n\nCWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS).\nThere also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.\nTo implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal association."
+    "text": "Corrected Weighted Least Squares\nThe Corrected Weighted Least Squares (CWLS) Method of Collider Correction uses Instrumental Variables to adjust for the effect of the collider on the outcome variable. This method is implemented through an equation that models the conditional effect of the exposure on the outcome given the collider as a constant.\nInstructions for correction:\n\nInstall ColliderBias package by Siyang Cai and load library.\nUse methodCB() function to assign the arguments to your GWAS output data.\nSpecified the method in methodCB() to “CWLS” for the type of correction we are using.\nInterpret the output values! The most important for CWLS are b and b_cor:\n\nb: The coefficient of the regression (slope) of ybeta[prune] on xbeta[prune], after correction for regression dilution.\nb_cor: The adjusted slope that compares the biased slope to the corrected slope.\n\n\nCWLS may not be the best correction method because produces results with residual heteroskedasticity. Other methods like Mendelian Randomization are more effective when accounting for variance in the b coefficient. Results from CWLS can be compared to MR through the MR-Robust Adjusted Profile Score (MR-RAPS).\nThere also exists a Corrected Weighted Bivariate Least Squares (CWBLS) method that serves the purpose of identifying the magnitude of collider bias that exists in a model. It uses a bivariate formula to analyze the summary statistics of each exposure in relation to the collider and the outcome.\nTo implement this, run the CWBLS() function from the ColliderBias package on your data. It will produce the b value that reflects the true causal associatio"
   },
   {
     "objectID": "sources.html",
